@@ -1,0 +1,28 @@
+@use "config";
+
+.header {
+  position: fixed;
+  width: 100%;
+  height: config.$header-height;
+}
+
+.main {
+  height: 100%;
+}
+
+.weather-container {
+  @include config.flex($centerY: false);
+  max-width: config.$max-view-width;
+  margin: 0 auto;
+  padding-top: config.$header-height;
+  height: 100%;
+  min-height: 100vh;
+  .section-saved {
+    width: 15%;
+    height: 94vh;
+  }
+  .section-weather {
+    max-height: 1200px;
+    width: 85%;
+  }
+}

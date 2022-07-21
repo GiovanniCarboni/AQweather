@@ -1,0 +1,15 @@
+@use "../config";
+
+.footer {
+  position: fixed;
+  bottom: 3.2rem;
+  right: -3.8rem;
+  background-color: config.$secondary-color;
+  border: 2px solid config.$secondary-tint-1;
+  padding: 0.5rem 3.5rem;
+  transform: rotate(330deg);
+  a {
+    border-radius: config.$b-radius-s;
+    padding: 3px;
+  }
+}

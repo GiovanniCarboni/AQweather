@@ -1,0 +1,40 @@
+@use "../config";
+
+.search-bar-container {
+  position: relative;
+}
+
+.results-box {
+  overflow: scroll;
+  overflow-x: hidden;
+  max-height: 40rem;
+  width: 30rem;
+  background-color: config.$white;
+  border-radius: config.$b-radius-s;
+  box-shadow: 1px 3px 3px config.$light-gray;
+  position: absolute;
+  top: 3.7rem;
+  right: 4.3rem;
+  padding: config.$pad-m;
+
+  .results-list {
+    list-style: none;
+    .results-item {
+      padding: 0 config.$pad-s;
+      @include config.flex();
+      height: 4rem;
+      border-bottom: 1px solid config.$light-gray;
+      cursor: pointer;
+      transition: all config.$trans-s;
+      a {
+        border-radius: config.$b-radius-s;
+      }
+      &:last-child {
+        border: none;
+      }
+      &:hover {
+        background-color: config.$light-gray;
+      }
+    }
+  }
+}

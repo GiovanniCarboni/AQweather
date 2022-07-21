@@ -1,0 +1,153 @@
+@use "../config";
+
+.section-weather {
+  background-color: config.$primary-shade-2;
+  position: relative;
+
+  .weather-display {
+    @include config.grid($columns: 1fr 1fr, $rows: 4fr 5fr);
+    height: 100%;
+    padding: config.$pad-l config.$pad-ml;
+  }
+}
+
+// MAIN
+
+.weather-main {
+  @include config.flex(
+    $gap: config.$gap-ml,
+    $direction: column,
+    $centerY: false
+  );
+  justify-content: flex-end;
+  height: 100%;
+  grid-column: 1 / 2;
+  padding: config.$pad-ml;
+  overflow-y: hidden;
+  border-right: 1px solid config.$primary-shade-3;
+
+  &--heading {
+    @include config.flex($space-between: true);
+  }
+
+  &--description {
+    @include config.flex($gap: config.$gap-m);
+    justify-content: flex-end;
+  }
+
+  &--hourly {
+    overflow: scroll;
+    overflow-y: hidden;
+    margin-top: 1.5rem;
+    .hourly-list {
+      @include config.flex();
+      padding-bottom: config.$pad-m;
+
+      .hourly-item {
+        @include config.flex($gap: config.$gap-xs, $direction: column);
+        min-width: 10rem;
+
+        padding: config.$pad-m;
+        border-right: 2px solid config.$primary-shade-1;
+        &:last-child {
+          border: none;
+        }
+        img {
+          transition: config.$trans-s;
+        }
+        &:hover {
+          img {
+            transform: scale(115%);
+          }
+        }
+      }
+    }
+  }
+}
+
+// DETAILS
+
+.weather-details {
+  @include config.flex($gap: config.$gap-m);
+  align-items: flex-start;
+  grid-row: 2 / 3;
+  background-color: config.$primary-shade-2;
+  border-right: 1px solid config.$primary-shade-3;
+  padding: config.$pad-ml;
+
+  .details-col-1,
+  .details-col-2 {
+    @include config.flex($gap: config.$gap-m, $direction: column);
+    width: 100%;
+
+    .detail {
+      @include config.flex();
+      justify-content: space-between;
+      border: 2px solid config.$primary-shade-1;
+      padding: config.$pad-ml;
+      width: 100%;
+      border-radius: config.$b-radius-m;
+      transition: config.$trans-s;
+      &:hover {
+        transform: translateY(-1.5px);
+        box-shadow: 0.5px 1.5px 3px config.$light-gray;
+      }
+    }
+  }
+}
+
+// DAILY
+
+.weather-daily {
+  @include config.flex();
+  padding: config.$pad-ml;
+  grid-row: span 2;
+  .daily-list {
+    list-style: none;
+    width: 100%;
+    .daily-item {
+      @include config.flex($gap: config.$gap-m, $space-between: true);
+      padding: config.$pad-s config.$pad-l;
+      border-bottom: 2px solid config.$primary-shade-1;
+      &:last-child {
+        border: none;
+      }
+      transition: all config.$trans-s;
+      .forecast-icon {
+        transition: inherit;
+      }
+      &:hover {
+        transform: translateY(-1.5px);
+        .daily-item--forecast-desc {
+          display: block;
+        }
+        .forecast-icon {
+          transform: scale(105%);
+        }
+      }
+
+      &--forecast-desc {
+        display: none;
+        font-size: config.$f-size-ms;
+      }
+      &--desc {
+        @include config.grid($columns: 1fr 1fr 1fr, $centerY: true);
+        div {
+          padding: config.$pad-s config.$pad-m;
+        }
+        .min-temp,
+        .max-temp {
+          @include config.flex($gap: config.$gap-xs);
+          justify-content: center;
+        }
+        .sunset,
+        .sunrise {
+          @include config.flex($gap: config.$gap-xs);
+        }
+        .icon {
+          grid-row: span 2;
+        }
+      }
+    }
+  }
+}

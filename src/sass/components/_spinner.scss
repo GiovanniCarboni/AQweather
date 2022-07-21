@@ -1,0 +1,11 @@
+@use "../config";
+
+.spinner {
+  @include config.flex();
+  width: fit-content;
+  margin: 0 auto;
+  height: 100%;
+  img {
+    animation: rotate config.$spinner-speed infinite linear;
+  }
+}

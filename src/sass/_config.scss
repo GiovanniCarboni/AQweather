@@ -1,0 +1,172 @@
+//////////////////////////////////////////////////
+/////////////// ANIMATIONS
+//////////////////////////////////////////////////
+/* transitions */
+$trans-s: 0.2s;
+$trans-m: 0.3s;
+
+$spinner-speed: 1.5s;
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(350deg);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+//////////////////////////////////////////////////
+///////////////  MIXINS
+//////////////////////////////////////////////////
+
+@mixin flex($gap: 0, $centerY: true, $space-between: false, $direction: row) {
+  display: flex;
+  gap: $gap;
+
+  @if $direction == column {
+    flex-direction: column;
+  }
+
+  @if $centerY {
+    align-items: center;
+  }
+
+  @if $space-between {
+    justify-content: space-between;
+  }
+}
+
+@mixin grid(
+  $gap: 0,
+  $row-gap: false,
+  $columns: 1fr 1fr,
+  $rows: false,
+  $centerY: false
+) {
+  display: grid;
+  grid-template-columns: $columns;
+  gap: $gap;
+
+  @if $row-gap {
+    row-gap: $row-gap;
+  }
+  @if $rows {
+    grid-template-rows: $rows;
+  }
+  @if $centerY {
+    align-items: center;
+  }
+}
+
+@mixin font-border($temp) {
+  @if $temp == "hot" {
+    text-shadow: 1.5px 0 3px $secondary-tint-1, -1.5px 0 3px $secondary-tint-1,
+      0 1.5px 3px $secondary-tint-1, 0 -1.5px 3px $secondary-tint-1;
+  }
+
+  @if $temp == "cold" {
+    text-shadow: 1.5px 0 3px $primary-color, -1.5px 0 3px $primary-color,
+      0 1.5px 3px $primary-color, 0 -1.5px 3px $primary-color;
+  }
+}
+
+//////////////////////////////////////////////////
+/////////////// LAYOUT
+//////////////////////////////////////////////////
+
+/* z-index */
+$z-bottom: 0;
+$z-middle: 5;
+$z-top: 10;
+
+/* heights */
+$header-height: 5rem;
+$saved-item-height: 7rem;
+
+/* widths */
+$max-view-width: 1900px;
+
+/* border-radius */
+$b-radius-s: 3px;
+$b-radius-ms: 1rem;
+$b-radius-m: 2rem;
+$br-circle: 50%;
+
+$radius-btn-search: $b-radius-s $b-radius-m $b-radius-m $b-radius-s;
+$radius-header: 0 0 0.8rem 0.8rem;
+
+/*   padding   */
+$pad-s: 0.8rem;
+$pad-m: 1.2rem;
+$pad-ml: 2rem;
+$pad-l: 5rem;
+
+/* gaps */
+$gap-xs: 0.3rem;
+$gap-s: 1rem;
+$gap-m: 2rem;
+$gap-ml: 2.5rem;
+
+//////////////////////////////////////////////////
+/////////////// TYPOGRAPHY
+//////////////////////////////////////////////////
+
+$font-family: "Sora", sans-serif;
+
+/* font-size */
+$f-size-s: 1.2rem;
+$f-size-ms: 1.6rem;
+$f-size-m: 1.8rem;
+$f-size-ml: 2.2rem;
+$f-size-l: 2.8rem;
+$f-size-xl: 3.2rem;
+$f-size-xxl: 3.8rem;
+
+$increase-s: calc(100% + 0.05rem);
+
+/* letter spacing */
+$let-sp-s: 1px;
+$let-sp-m: 2px;
+
+/* font-weight */
+$f-weight-s: 600;
+$f-weight-l: 700;
+
+//////////////////////////////////////////////////
+/////////////// COLORS
+//////////////////////////////////////////////////
+
+$gray: #555;
+$light-gray: #e9e9e9;
+$white: #fff;
+$red: #f03e3e;
+
+$scroll-thumb-color: rgb(153, 153, 153, 0.6);
+
+//https://maketintsandshades.com/#1098ad
+$primary-tint-1: #0b6a79;
+$primary-color: #1098ad;
+$primary-shade-1: #70c1ce;
+$primary-shade-2: #e7f5f7;
+$primary-shade-3: #9fd6de;
+
+// https://maketintsandshades.com/#fbca1a
+$secondary-tint-1: #c9a215;
+$secondary-color: #fbca1a;
+
+//////////////////////////////////////////////////
+/////////////// SHADOWS
+//////////////////////////////////////////////////
+// 0 0 0 3px $primary-shade-3
+// 0 2px 2px $gray box
+// 0.5px 1.5px 3px $light-gray box

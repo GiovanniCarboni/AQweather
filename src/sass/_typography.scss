@@ -1,0 +1,111 @@
+@use "config";
+
+body {
+  font-family: config.$font-family;
+  color: config.$gray;
+}
+
+// HEADER
+
+.results-list {
+  font-size: config.$f-size-m;
+  .results-item {
+    &:hover {
+      font-size: config.$increase-s;
+    }
+  }
+}
+
+.search-bar {
+  font-family: inherit;
+}
+
+.brand-name {
+  font-size: config.$f-size-ms;
+  letter-spacing: config.$let-sp-s;
+  color: config.$white;
+  font-weight: config.$f-weight-l;
+}
+
+// SECTION SAVED
+
+.saved-item {
+  &--temp {
+    font-size: config.$f-size-ml;
+    font-weight: config.$f-weight-l;
+    color: config.$white;
+    letter-spacing: config.$let-sp-m;
+  }
+  .hot {
+    @include config.font-border($temp: "hot");
+  }
+  .cold {
+    @include config.font-border($temp: "cold");
+  }
+  &--city {
+    font-size: config.$f-size-ms;
+    font-weight: config.$f-weight-s;
+  }
+}
+
+// SECTION WEATHER
+
+// sub MAIN
+.weather-main {
+  &--heading {
+    .display-name {
+      font-size: config.$f-size-xl;
+    }
+    .display-temp {
+      font-size: config.$f-size-xxl;
+    }
+  }
+
+  &--description {
+    font-size: config.$f-size-l;
+  }
+
+  &--hourly {
+    .hourly-item {
+      font-size: config.$f-size-s;
+    }
+    .hourly-temp {
+      font-weight: config.$f-weight-s;
+    }
+  }
+}
+
+// sub DETAILS
+.weather-details {
+  font-size: config.$f-size-m;
+  .details-entry {
+    font-weight: config.$f-weight-s;
+  }
+}
+
+// sub DAILY
+.daily-list {
+  font-size: config.$f-size-m;
+  .daily-item {
+    &--day {
+      font-weight: config.$f-weight-s;
+    }
+    &--desc {
+      font-size: config.$f-size-ms;
+
+      .min-temp,
+      .max-temp {
+        span:nth-child(1) {
+          font-weight: config.$f-weight-s;
+        }
+      }
+    }
+  }
+}
+
+/* end section weather */
+
+// FOOTER
+.footer {
+  font-size: config.$f-size-s;
+}

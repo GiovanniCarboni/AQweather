@@ -1,0 +1,36 @@
+@use "./config";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px config.$primary-shade-3;
+  }
+}
+
+html {
+  font-size: 67%;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: config.$trans-m;
+  border-radius: config.$br-circle;
+}
+
+a,
+a:active {
+  color: config.$gray;
+}
+a:visited,
+a:link {
+  text-decoration: none;
+}
+
+.hidden {
+  display: none;
+}

@@ -1,0 +1,14 @@
+@use "../config";
+
+.header {
+  @include config.flex($space-between: true);
+  background-color: config.$primary-color;
+  padding: config.$pad-s config.$pad-m;
+  box-shadow: 0 2px 2px config.$gray;
+  z-index: config.$z-top;
+  border-radius: config.$radius-header;
+
+  .brand-container {
+    @include config.flex($gap: config.$gap-s);
+  }
+}

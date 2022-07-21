@@ -1,0 +1,14 @@
+@use "../config";
+
+.search-bar-container {
+  @include config.flex($gap: config.$gap-s);
+  width: 45%;
+  max-width: 45rem;
+  .search-bar {
+    border-radius: config.$b-radius-s;
+    border: none;
+    padding: config.$pad-s;
+    width: 100%;
+    transition: config.$trans-s;
+  }
+}

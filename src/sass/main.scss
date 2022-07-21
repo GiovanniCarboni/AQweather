@@ -1,0 +1,23 @@
+/* GENERAL */
+@use "config"; // variables, mixins, keyframes
+@use "./general"; // general styles
+@use "./typography";
+
+/* COMPONENTS */
+@use "./components/buttons";
+@use "./components/scrollbar";
+@use "./components/search-bar";
+@use "./components/results-box";
+@use "./components/spinner";
+
+// /* LAYOUT */
+@use "./layout.scss";
+
+/* SECTIONS (borders included) */
+@use "./sections/header";
+@use "./sections/section-saved";
+@use "./sections/section-weather";
+@use "./sections/footer";
+
+/* MEDIA QUERIES */
+@use "queries";

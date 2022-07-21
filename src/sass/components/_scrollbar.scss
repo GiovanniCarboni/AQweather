@@ -1,0 +1,15 @@
+@use "../config";
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+
+  // border-left: 1px solid config.$light-gray;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: config.$scroll-thumb-color;
+  border-radius: config.$b-radius-ms;
+}
