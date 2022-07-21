@@ -1,13 +1,48 @@
 import { API_KEY } from "./config.js";
+import { formatDate } from "./helpers.js";
 
 const state = {
   weather: {},
 };
 
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+const formatDataHourly = function (data) {
+  return data.map((entry) => {
+    return {
+      hour: `${new Date(entry.dt * 1000).getHours()}:00}`,
+      temp: entry.temp,
+      main: entry.weather[0].main,
+    };
+  });
+};
+const formatDataDaily = function (data) {
+  return data.map((entry) => {
+    return {
+      day: days[new Date(entry.dt * 1000).getDay()],
+      main: entry.weather[0].main,
+      min: Math.round(entry.temp.min),
+      max: Math.round(entry.temp.max),
+      sunrise: formatDate(entry.sunrise).time,
+      sunset: formatDate(entry.sunset).time,
+    };
+  });
+};
+
 const getWeather = async function (lat, lon) {
   const res = await fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
   );
+
+  if (!res.ok) return;
 
   const data = await res.json();
 
@@ -24,12 +59,12 @@ const getWeather = async function (lat, lon) {
       visibility: data.current.visibility,
       UVI: data.current.uvi,
       pressure: data.current.pressure,
+      sunset: data.current.sunset,
+      sunrise: data.current.sunrise,
     },
-    hourly: data.hourly.slice(24),
-    daily: data.daily,
+    hourly: formatDataHourly(data.hourly.slice(0, 12)),
+    daily: formatDataDaily(data.daily),
   };
-
-  console.log(data);
   console.log(state.weather);
 };
 
