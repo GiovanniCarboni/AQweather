@@ -1,7 +1,8 @@
-import "core-js/stable"; // this is for everything
-import "regenerator-runtime/runtime"; // this is for async/await
+import "core-js/stable";
+import { async } from "regenerator-runtime";
 import * as model from "./model.js";
 import ResultsBoxView from "./views/resultsBoxView.js";
+import SavedView from "./views/SavedView.js";
 import WeatherView from "./views/WeatherView.js";
 
 // if (module.hot) {

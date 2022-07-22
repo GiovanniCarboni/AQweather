@@ -1,4 +1,3 @@
-import { async } from "regenerator-runtime";
 import { API_KEY_city, API_KEY_weather } from "./config.js";
 import { formatDate, getJSON } from "./helpers.js";
 
@@ -30,28 +29,6 @@ const days = [
   "Friday",
   "Saturday",
 ];
-
-const formatDataHourly = function (data) {
-  return data.map((entry) => {
-    return {
-      hour: formatDate(entry.dt).time,
-      temp: Math.round(entry.temp),
-      main: entry.weather[0].main.toLowerCase(),
-    };
-  });
-};
-const formatDataDaily = function (data) {
-  return data.map((entry) => {
-    return {
-      day: days[new Date(entry.dt * 1000).getDay()],
-      main: entry.weather[0].main.toLowerCase(),
-      min: Math.round(entry.temp.min),
-      max: Math.round(entry.temp.max),
-      sunrise: formatDate(entry.sunrise).time,
-      sunset: formatDate(entry.sunset).time,
-    };
-  });
-};
 
 export const getCity = async function (searchWord) {
   try {
@@ -115,4 +92,25 @@ export const getWeather = async function (lat, lon, city, country) {
   }
 };
 
-//
+function formatDataHourly(data) {
+  return data.map((entry) => {
+    return {
+      hour: formatDate(entry.dt).time,
+      temp: Math.round(entry.temp),
+      main: entry.weather[0].main.toLowerCase(),
+    };
+  });
+}
+
+function formatDataDaily(data) {
+  return data.map((entry) => {
+    return {
+      day: days[new Date(entry.dt * 1000).getDay()],
+      main: entry.weather[0].main.toLowerCase(),
+      min: Math.round(entry.temp.min),
+      max: Math.round(entry.temp.max),
+      sunrise: formatDate(entry.sunrise).time,
+      sunset: formatDate(entry.sunset).time,
+    };
+  });
+}
