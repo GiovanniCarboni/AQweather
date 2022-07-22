@@ -3,7 +3,22 @@ import { API_KEY_city, API_KEY_weather } from "./config.js";
 import { formatDate, getJSON } from "./helpers.js";
 
 export const state = {
-  weather: {},
+  weather: {
+    current: {},
+    hourly: [],
+    daily: [],
+    results: [
+      {
+        city: "",
+        state: "",
+        country: "",
+        countryCode: "",
+        lat: "",
+        lon: "",
+        id: "",
+      },
+    ],
+  },
 };
 
 const days = [
@@ -45,8 +60,6 @@ export const getCity = async function (searchWord) {
     const cityData = await getJSON(
       `https://api.geoapify.com/v1/geocode/search?city=${formattedWord}&format=json&type=city&limit=100&apiKey=${API_KEY_city}`
     );
-
-    console.log(cityData.results);
 
     const results = cityData.results
       // .filter((result) => result.city?.toLowerCase() === formattedWord)

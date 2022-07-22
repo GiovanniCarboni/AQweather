@@ -16,19 +16,6 @@ class ResultsBoxView extends View {
   }
   // src="src/img/icons/refresh-outline.svg"
 
-  renderSpinner() {
-    this._clear();
-    const spinner = `
-    <div class="spinner">
-      <img
-        src="${loadingIcon}"
-        alt="loading icon"
-        width="40"
-      />
-    </div>`;
-    this._parentEl.insertAdjacentHTML("afterbegin", spinner);
-  }
-
   addHandlerForm(handler) {
     const searchBar = this._searchBar;
     const parentEl = this._parentEl;

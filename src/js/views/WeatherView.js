@@ -1,28 +1,9 @@
-import rainyIcon from "../../img/icons/rainy-outline.svg";
-import sunIcon from "../../img/icons/sunny-outline.svg";
-import loadingIcon from "../../img/icons/refresh-outline.svg";
-
 import View from "./View.js";
 
 class WeatherView extends View {
   _parentEl = document.querySelector(".weather-display");
 
-  renderSpinner() {
-    console.log(rainyIcon);
-    this._clear();
-    const spinner = `
-    <div class="spinner">
-      <img
-        src="${loadingIcon}"
-        alt="loading icon"
-        width="40"
-      />
-    </div>`;
-    this._parentEl.insertAdjacentHTML("afterbegin", spinner);
-  }
-
   _generateMarkup(weather) {
-    console.log(weather);
     return `
     <div class="weather-main">
       <div class="weather-main--heading">
@@ -150,14 +131,16 @@ class WeatherView extends View {
             src="${this.icons.moon}"
             alt="moon icon"
             width="20"
-          /><span>${day.sunset}</span>
+          />
+          <span>${day.sunset}</span>
         </div>
         <div class="sunrise">
           <img
-            src="${sunIcon}"
+            src="${this.icons.sun}"
             alt="sun icon"
             width="23"
-          /><span>${day.sunrise}</span>
+          />
+          <span>${day.sunrise}</span>
         </div>
       </div>
     </li>

@@ -130,19 +130,16 @@
         width: 40%;
       }
 
-      &--forecast-desc {
-        display: none;
-        font-size: config.$f-size-ms;
-      }
       &--desc {
         @include config.grid($columns: 1fr 1fr 1fr, $centerY: true);
         div {
+          width: 50%;
           padding: config.$pad-s config.$pad-m;
         }
         .min-temp,
         .max-temp {
           @include config.flex($gap: config.$gap-xs);
-          justify-content: center;
+          // justify-content: center;
         }
         .sunset,
         .sunrise {

@@ -7,6 +7,8 @@ import mist from "../../img/icons/weather-icons/mist.svg";
 import rain from "../../img/icons/weather-icons/rain.svg";
 import snow from "../../img/icons/weather-icons/snow.svg";
 import thunderstorm from "../../img/icons/weather-icons/thunderstorm.svg";
+import load from "../../img/icons/refresh-outline.svg";
+import sun from "../../img/icons/sunny-outline.svg";
 
 export default class View {
   icons = {
@@ -19,11 +21,25 @@ export default class View {
     rain,
     snow,
     thunderstorm,
+    load,
+    sun,
   };
 
   render(data) {
     this._clear();
     this._parentEl.insertAdjacentHTML("afterbegin", this._generateMarkup(data));
+  }
+  renderSpinner() {
+    this._clear();
+    const spinner = `
+    <div class="spinner">
+      <img
+        src="${this.icons.load}"
+        alt="loading icon"
+        width="40"
+      />
+    </div>`;
+    this._parentEl.insertAdjacentHTML("afterbegin", spinner);
   }
   _clear() {
     this._parentEl.textContent = "";
