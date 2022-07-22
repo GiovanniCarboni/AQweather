@@ -27,6 +27,7 @@
       cursor: pointer;
       transition: all config.$trans-s;
       a {
+        width: 100%;
         border-radius: config.$b-radius-s;
       }
       &:last-child {

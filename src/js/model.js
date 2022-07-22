@@ -20,7 +20,7 @@ const formatDataHourly = function (data) {
   return data.map((entry) => {
     return {
       hour: `${new Date(entry.dt * 1000).getHours()}:00`,
-      temp: entry.temp,
+      temp: Math.round(entry.temp),
       main: entry.weather[0].main,
     };
   });
@@ -40,7 +40,6 @@ const formatDataDaily = function (data) {
 
 export const getCity = async function (searchWord) {
   try {
-    console.log(searchWord);
     const formattedWord = searchWord.toLowerCase().trim();
 
     const cityData = await getJSON(
@@ -55,34 +54,31 @@ export const getCity = async function (searchWord) {
           state: result.state ?? result.county ?? "none",
           country: result.country,
           countryCode: result.country_code.toUpperCase(),
+          lat: result.lat,
+          lon: result.lon,
+          id: `${result.city}%${result.lat}:${result.lon}`,
         };
       });
 
     if (results.length < 1) throw new Error("city data not available");
 
     state.results = results;
-
-    // getWeather(cityData.results[0].lat, cityData.results[0].lon);
   } catch (err) {
     throw err;
   }
 };
 
-export const getWeather = async function (lat, lon) {
+export const getWeather = async function (lat, lon, city, country) {
   try {
     const weatherData = await getJSON(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY_weather}`
     );
 
     state.weather = {
-      // location: {
-      //   city: cityData.results[0].city,
-      //   state: cityData.results[0].state ?? cityData.results[0].county,
-      //   country: cityData.results[0].country,
-      //   countryCode: cityData.results[0].country_code.toUpperCase(),
-      // },
+      city: city,
+      country: country,
       current: {
-        temp: weatherData.current.temp,
+        temp: Math.round(weatherData.current.temp),
         description: weatherData.current.weather[0].description,
         main: weatherData.current.weather[0].main,
         feelsLike: weatherData.current.feels_like,
@@ -97,26 +93,23 @@ export const getWeather = async function (lat, lon) {
         sunrise: weatherData.current.sunrise,
       },
       hourly: formatDataHourly(weatherData.hourly.slice(0, 12)),
-      daily: formatDataDaily(weatherData.daily),
+      daily: formatDataDaily(weatherData.daily.slice(1)),
     };
-    console.log(state.weather);
   } catch (err) {
     throw err;
   }
 };
 
-const menuBtn = document.querySelector(".menu-btn");
+// const menuBtn = document.querySelector(".menu-btn");
 
-const savedList = document.querySelector(".section-saved");
+// const savedList = document.querySelector(".section-saved");
 
-const closeMenuBtn = document.querySelector(".close-menu-btn");
+// const closeMenuBtn = document.querySelector(".close-menu-btn");
 
-const weatherDisplay = document.querySelector(".weather-display");
+// menuBtn.addEventListener("click", function () {
+//   savedList.style.left = "0";
+// });
 
-menuBtn.addEventListener("click", function () {
-  savedList.style.left = "0";
-});
-
-closeMenuBtn.addEventListener("click", function () {
-  savedList.style.left = "-50rem";
-});
+// closeMenuBtn.addEventListener("click", function () {
+//   savedList.style.left = "-50rem";
+// });
