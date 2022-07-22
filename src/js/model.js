@@ -37,23 +37,29 @@ const formatDataDaily = function (data) {
   });
 };
 
-export const getWeather = async function (lat, lon) {
+export const getWeather = async function (searchWord) {
   try {
     const cityData = await getJSON(
-      `https://api.geoapify.com/v1/geocode/search?city=${"  nuoro  "}&format=json&type=city&apiKey=${API_KEY_city}`
+      `https://api.geoapify.com/v1/geocode/search?city=${searchWord}&format=json&type=city&limit=100&apiKey=${API_KEY_city}`
     );
+
+    console.log(cityData);
+
+    if (cityData.results.length < 1) throw new Error("city data not available");
 
     const weatherData = await getJSON(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${cityData.results[0].lat}&lon=${cityData.results[0].lon}&units=metric&appid=${API_KEY_weather}`
     );
-    // const cityData = await getJSON(
-    //   `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&format=json&apiKey=5074afdd2d514e979ef4b42077f910f5`
-    // );
+
+    state.results = cityData.results;
 
     state.weather = {
-      city: cityData.results[0].city,
-      state: cityData.results[0].state,
-      country: cityData.results[0].country,
+      location: {
+        city: cityData.results[0].city,
+        state: cityData.results[0].state ?? cityData.results[0].county,
+        country: cityData.results[0].country,
+        countryCode: cityData.results[0].country_code.toUpperCase(),
+      },
       current: {
         temp: weatherData.current.temp,
         description: weatherData.current.weather[0].description,

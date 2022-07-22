@@ -1,6 +1,7 @@
 import "core-js/stable"; // this is for everything
 import "regenerator-runtime/runtime"; // this is for async/await
 import * as model from "./model.js";
+import ResultsBoxView from "./views/resultsBoxView.js";
 
 // if (module.hot) {
 //   module.hot.accept();
@@ -8,10 +9,12 @@ import * as model from "./model.js";
 
 const controlWeather = async function () {
   try {
-    await model.getWeather();
-    console.log(model.state.weather);
+    await model.getWeather("cape city");
+
+    ResultsBoxView.render(model.state.results);
   } catch (err) {
-    console.error(err);
+    ResultsBoxView.renderError();
+    console.error("💣💣💣", err);
   }
 };
 

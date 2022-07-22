@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="src/sass/main.scss" />
     <link rel="shortcut icon" href="src/img/logo.png" />
-    <script defer type="module" src="src/js/main.js"></script>
+    <script defer type="module" src="src/js/controller.js"></script>
     <title>AQ weather</title>
   </head>
   <body>
@@ -27,85 +27,12 @@
 
         <form class="search-bar-container">
           <input type="text" placeholder="Type a city..." class="search-bar" />
-          <div class="results-box hidden">
-            <ul class="results-list">
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-              <li class="results-item"><a href="#">Sassari</a></li>
-            </ul>
+          <div class="results-container">
+            <div class="results-box hidden">
+              <!-- <ul class="results-list">
+                <li class="results-item"><a href="#">Sassari</a></li>
+              </ul> -->
+            </div>
           </div>
           <button class="btn btn--search">
             <img
