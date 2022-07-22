@@ -1,9 +1,11 @@
 class ResultsBoxView {
   _parentEl = document.querySelector(".results-box");
   _errorMessage = "Could not find city";
+  _form = document.querySelector(".search-bar-container");
+  _searchBar = document.querySelector(".search-bar");
 
   render(data) {
-    // this._parentEl.textContent = "";
+    this._parentEl.textContent = "";
     this._parentEl.classList.remove("hidden");
     this._parentEl.insertAdjacentHTML("afterbegin", this._generateMarkup(data));
   }
@@ -12,13 +14,16 @@ class ResultsBoxView {
     this._parentEl.classList.remove("hidden");
     this._parentEl.insertAdjacentHTML(
       "afterbegin",
-      this._generateErrorMarkup()
+      `<p class="error-message">${this._errorMessage}</p>`
     );
   }
 
-  _generateErrorMarkup() {
-    return `
-    <p class="error-message">${this._errorMessage}</p>`;
+  addHandlerResults(handler) {
+    const searchBar = this._searchBar;
+    this._form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      handler(searchBar.value);
+    });
   }
 
   _generateMarkup(data) {

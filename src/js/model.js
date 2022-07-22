@@ -1,3 +1,4 @@
+import { async } from "regenerator-runtime";
 import { API_KEY_city, API_KEY_weather } from "./config.js";
 import { formatDate, getJSON } from "./helpers.js";
 
@@ -37,29 +38,49 @@ const formatDataDaily = function (data) {
   });
 };
 
-export const getWeather = async function (searchWord) {
+export const getCity = async function (searchWord) {
   try {
+    console.log(searchWord);
+    const formattedWord = searchWord.toLowerCase().trim();
+
     const cityData = await getJSON(
-      `https://api.geoapify.com/v1/geocode/search?city=${searchWord}&format=json&type=city&limit=100&apiKey=${API_KEY_city}`
+      `https://api.geoapify.com/v1/geocode/search?city=${formattedWord}&format=json&type=city&limit=100&apiKey=${API_KEY_city}`
     );
 
-    console.log(cityData);
+    const results = cityData.results
+      .filter((result) => result.city?.toLowerCase() === formattedWord)
+      .map((result) => {
+        return {
+          city: result.city,
+          state: result.state ?? result.county ?? "none",
+          country: result.country,
+          countryCode: result.country_code.toUpperCase(),
+        };
+      });
 
-    if (cityData.results.length < 1) throw new Error("city data not available");
+    if (results.length < 1) throw new Error("city data not available");
 
+    state.results = results;
+
+    // getWeather(cityData.results[0].lat, cityData.results[0].lon);
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getWeather = async function (lat, lon) {
+  try {
     const weatherData = await getJSON(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${cityData.results[0].lat}&lon=${cityData.results[0].lon}&units=metric&appid=${API_KEY_weather}`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY_weather}`
     );
-
-    state.results = cityData.results;
 
     state.weather = {
-      location: {
-        city: cityData.results[0].city,
-        state: cityData.results[0].state ?? cityData.results[0].county,
-        country: cityData.results[0].country,
-        countryCode: cityData.results[0].country_code.toUpperCase(),
-      },
+      // location: {
+      //   city: cityData.results[0].city,
+      //   state: cityData.results[0].state ?? cityData.results[0].county,
+      //   country: cityData.results[0].country,
+      //   countryCode: cityData.results[0].country_code.toUpperCase(),
+      // },
       current: {
         temp: weatherData.current.temp,
         description: weatherData.current.weather[0].description,
@@ -79,8 +100,6 @@ export const getWeather = async function (searchWord) {
       daily: formatDataDaily(weatherData.daily),
     };
     console.log(state.weather);
-
-    console.log(cityData);
   } catch (err) {
     throw err;
   }

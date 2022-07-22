@@ -7,11 +7,13 @@ import ResultsBoxView from "./views/resultsBoxView.js";
 //   module.hot.accept();
 // }
 
-const controlWeather = async function () {
+const controlCity = async function (searchWord) {
   try {
-    await model.getWeather("cape city");
+    await model.getCity(searchWord);
 
     ResultsBoxView.render(model.state.results);
+
+    console.log(model.state);
   } catch (err) {
     ResultsBoxView.renderError();
     console.error("💣💣💣", err);
@@ -19,6 +21,6 @@ const controlWeather = async function () {
 };
 
 const init = function () {
-  controlWeather();
+  ResultsBoxView.addHandlerResults(controlCity);
 };
 init();
