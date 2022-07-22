@@ -3,6 +3,7 @@ import "regenerator-runtime/runtime"; // this is for async/await
 import * as model from "./model.js";
 import ResultsBoxView from "./views/resultsBoxView.js";
 import WeatherView from "./views/WeatherView.js";
+
 // if (module.hot) {
 //   module.hot.accept();
 // }
@@ -22,6 +23,8 @@ const controlCity = async function (searchWord) {
 
 const controlWeather = async function (id) {
   try {
+    WeatherView.renderSpinner();
+
     const result = model.state.results.find((result) => result.id === id);
 
     await model.getWeather(result.lat, result.lon, result.city, result.country);
@@ -37,3 +40,17 @@ const init = function () {
   ResultsBoxView.addHandlerResults(controlWeather);
 };
 init();
+
+const menuBtn = document.querySelector(".menu-btn");
+
+const savedList = document.querySelector(".section-saved");
+
+const closeMenuBtn = document.querySelector(".close-menu-btn");
+
+menuBtn.addEventListener("click", function () {
+  savedList.style.left = "0";
+});
+
+closeMenuBtn.addEventListener("click", function () {
+  savedList.style.left = "-50rem";
+});

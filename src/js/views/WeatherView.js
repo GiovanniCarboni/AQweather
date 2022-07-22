@@ -1,20 +1,28 @@
 import rainyIcon from "../../img/icons/rainy-outline.svg";
-import moonIcon from "../../img/icons/moon-outline.svg";
 import sunIcon from "../../img/icons/sunny-outline.svg";
+import loadingIcon from "../../img/icons/refresh-outline.svg";
 
-class WeatherView {
+import View from "./View.js";
+
+class WeatherView extends View {
   _parentEl = document.querySelector(".weather-display");
 
-  render(weather) {
-    console.log(weather);
-    this._parentEl.textContent = "";
-    this._parentEl.insertAdjacentHTML(
-      "afterbegin",
-      this._generateMarkup(weather)
-    );
+  renderSpinner() {
+    console.log(rainyIcon);
+    this._clear();
+    const spinner = `
+    <div class="spinner">
+      <img
+        src="${loadingIcon}"
+        alt="loading icon"
+        width="40"
+      />
+    </div>`;
+    this._parentEl.insertAdjacentHTML("afterbegin", spinner);
   }
 
   _generateMarkup(weather) {
+    console.log(weather);
     return `
     <div class="weather-main">
       <div class="weather-main--heading">
@@ -24,7 +32,7 @@ class WeatherView {
       <div class="weather-main--description">
         <span>
           <img
-            src="${rainyIcon}"
+            src="${this.icons[weather.current.main]}"
             width="40"
             alt="weather icon"
           />
@@ -62,7 +70,7 @@ class WeatherView {
           <span class="details-tag">Wind direction</span>
           <span class="details-entry wind-direction">${
             weather.current.windDirection
-          } deg</span>
+          }°</span>
         </div>
       </div>
       <div class="details-col-2">
@@ -97,22 +105,7 @@ class WeatherView {
       </ul>
     </div>
 
-            <button class="refresh-btn btn">
-              <img
-                src="src/img/icons/refresh-outline.svg"
-                width="40"
-                alt="refresh icon"
-                class="refresh-icon"
-              />
-            </button>
-            <button class="menu-btn btn">
-              <img
-                src="src/img/icons/menu-outline.svg"
-                width="40"
-                alt="menu icon"
-                class="menu-icon"
-              />
-            </button>
+            
     `;
   }
   _generateMarkupHourly(weatherHourly) {
@@ -124,7 +117,7 @@ class WeatherView {
         <div class="hourly-time">${hour.hour}</div>
           <div class="hourly-icon">
             <img
-              src="${rainyIcon}"
+              src="${this.icons[hour.main]}"
               width="30"
               alt="weather icon"
              />
@@ -144,7 +137,7 @@ class WeatherView {
         <div class="daily-item--desc">
         <div class="icon">
           <img
-            src="${rainyIcon}"
+            src="${this.icons[day.main]}"
             alt="rainy icon"
             width="40"
             class="forecast-icon"
@@ -154,7 +147,7 @@ class WeatherView {
         <div class="max-temp">max <span>${day.max}°</span></div>
         <div class="sunset">
           <img
-            src="${moonIcon}"
+            src="${this.icons.moon}"
             alt="moon icon"
             width="20"
           /><span>${day.sunset}</span>

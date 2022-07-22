@@ -19,9 +19,9 @@ const days = [
 const formatDataHourly = function (data) {
   return data.map((entry) => {
     return {
-      hour: `${new Date(entry.dt * 1000).getHours()}:00`,
+      hour: formatDate(entry.dt).time,
       temp: Math.round(entry.temp),
-      main: entry.weather[0].main,
+      main: entry.weather[0].main.toLowerCase(),
     };
   });
 };
@@ -29,7 +29,7 @@ const formatDataDaily = function (data) {
   return data.map((entry) => {
     return {
       day: days[new Date(entry.dt * 1000).getDay()],
-      main: entry.weather[0].main,
+      main: entry.weather[0].main.toLowerCase(),
       min: Math.round(entry.temp.min),
       max: Math.round(entry.temp.max),
       sunrise: formatDate(entry.sunrise).time,
@@ -80,10 +80,10 @@ export const getWeather = async function (lat, lon, city, country) {
       current: {
         temp: Math.round(weatherData.current.temp),
         description: weatherData.current.weather[0].description,
-        main: weatherData.current.weather[0].main,
-        feelsLike: weatherData.current.feels_like,
+        main: weatherData.current.weather[0].main.toLowerCase(),
+        feelsLike: Math.round(weatherData.current.feels_like),
         humidity: weatherData.current.humidity,
-        windSpeed: weatherData.current.wind_speed,
+        windSpeed: Math.round(weatherData.current.wind_speed),
         windDirection: weatherData.current.wind_deg,
         cloudiness: weatherData.current.clouds,
         visibility: weatherData.current.visibility,
@@ -92,7 +92,7 @@ export const getWeather = async function (lat, lon, city, country) {
         sunset: weatherData.current.sunset,
         sunrise: weatherData.current.sunrise,
       },
-      hourly: formatDataHourly(weatherData.hourly.slice(0, 12)),
+      hourly: formatDataHourly(weatherData.hourly.slice(2, 14)),
       daily: formatDataDaily(weatherData.daily.slice(1)),
     };
   } catch (err) {
@@ -100,16 +100,4 @@ export const getWeather = async function (lat, lon, city, country) {
   }
 };
 
-// const menuBtn = document.querySelector(".menu-btn");
-
-// const savedList = document.querySelector(".section-saved");
-
-// const closeMenuBtn = document.querySelector(".close-menu-btn");
-
-// menuBtn.addEventListener("click", function () {
-//   savedList.style.left = "0";
-// });
-
-// closeMenuBtn.addEventListener("click", function () {
-//   savedList.style.left = "-50rem";
-// });
+//

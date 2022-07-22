@@ -1,16 +1,11 @@
 import loadingIcon from "../../img/icons/refresh-outline.svg";
+import View from "./View.js";
 
-class ResultsBoxView {
+class ResultsBoxView extends View {
   _parentEl = document.querySelector(".results-box");
   _errorMessage = "Could not find city";
   _form = document.querySelector(".search-bar-container");
   _searchBar = document.querySelector(".search-bar");
-
-  render(data) {
-    this._clear();
-
-    this._parentEl.insertAdjacentHTML("afterbegin", this._generateMarkup(data));
-  }
 
   renderError() {
     this._clear();
@@ -39,8 +34,8 @@ class ResultsBoxView {
     const parentEl = this._parentEl;
     this._form.addEventListener("submit", function (e) {
       e.preventDefault();
-      parentEl.classList.remove("hidden");
       handler(searchBar.value);
+      parentEl.classList.remove("hidden");
     });
   }
 
@@ -66,9 +61,6 @@ class ResultsBoxView {
       ${resultslist}        
       </ul>
     `;
-  }
-  _clear() {
-    this._parentEl.textContent = "";
   }
 }
 
