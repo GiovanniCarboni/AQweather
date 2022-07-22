@@ -8,3 +8,9 @@ export const formatDate = function (date) {
     ).padStart(2, "0")}`,
   };
 };
+
+export const getJSON = async function (url) {
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
+};

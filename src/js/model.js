@@ -1,7 +1,7 @@
-import { API_KEY } from "./config.js";
-import { formatDate } from "./helpers.js";
+import { API_KEY_city, API_KEY_weather } from "./config.js";
+import { formatDate, getJSON } from "./helpers.js";
 
-const state = {
+export const state = {
   weather: {},
 };
 
@@ -18,7 +18,7 @@ const days = [
 const formatDataHourly = function (data) {
   return data.map((entry) => {
     return {
-      hour: `${new Date(entry.dt * 1000).getHours()}:00}`,
+      hour: `${new Date(entry.dt * 1000).getHours()}:00`,
       temp: entry.temp,
       main: entry.weather[0].main,
     };
@@ -37,38 +37,48 @@ const formatDataDaily = function (data) {
   });
 };
 
-const getWeather = async function (lat, lon) {
-  const res = await fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
-  );
+export const getWeather = async function (lat, lon) {
+  try {
+    const cityData = await getJSON(
+      `https://api.geoapify.com/v1/geocode/search?city=${"  nuoro  "}&format=json&type=city&apiKey=${API_KEY_city}`
+    );
 
-  if (!res.ok) return;
+    const weatherData = await getJSON(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${cityData.results[0].lat}&lon=${cityData.results[0].lon}&units=metric&appid=${API_KEY_weather}`
+    );
+    // const cityData = await getJSON(
+    //   `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&format=json&apiKey=5074afdd2d514e979ef4b42077f910f5`
+    // );
 
-  const data = await res.json();
+    state.weather = {
+      city: cityData.results[0].city,
+      state: cityData.results[0].state,
+      country: cityData.results[0].country,
+      current: {
+        temp: weatherData.current.temp,
+        description: weatherData.current.weather[0].description,
+        main: weatherData.current.weather[0].main,
+        feelsLike: weatherData.current.feels_like,
+        humidity: weatherData.current.humidity,
+        windSpeed: weatherData.current.wind_speed,
+        windDirection: weatherData.current.wind_deg,
+        cloudiness: weatherData.current.clouds,
+        visibility: weatherData.current.visibility,
+        UVI: weatherData.current.uvi,
+        pressure: weatherData.current.pressure,
+        sunset: weatherData.current.sunset,
+        sunrise: weatherData.current.sunrise,
+      },
+      hourly: formatDataHourly(weatherData.hourly.slice(0, 12)),
+      daily: formatDataDaily(weatherData.daily),
+    };
+    console.log(state.weather);
 
-  state.weather = {
-    current: {
-      temp: data.current.temp,
-      description: data.current.weather[0].description,
-      main: data.current.weather[0].main,
-      feelsLike: data.current.feels_like,
-      humidity: data.current.humidity,
-      windSpeed: data.current.wind_speed,
-      windDirection: data.current.wind_deg,
-      cloudiness: data.current.clouds,
-      visibility: data.current.visibility,
-      UVI: data.current.uvi,
-      pressure: data.current.pressure,
-      sunset: data.current.sunset,
-      sunrise: data.current.sunrise,
-    },
-    hourly: formatDataHourly(data.hourly.slice(0, 12)),
-    daily: formatDataDaily(data.daily),
-  };
-  console.log(state.weather);
+    console.log(cityData);
+  } catch (err) {
+    throw err;
+  }
 };
-
-getWeather(39.2238, 9.1217);
 
 const menuBtn = document.querySelector(".menu-btn");
 
