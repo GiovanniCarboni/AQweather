@@ -46,12 +46,14 @@ export const getCity = async function (searchWord) {
       `https://api.geoapify.com/v1/geocode/search?city=${formattedWord}&format=json&type=city&limit=100&apiKey=${API_KEY_city}`
     );
 
+    console.log(cityData.results);
+
     const results = cityData.results
-      .filter((result) => result.city?.toLowerCase() === formattedWord)
+      // .filter((result) => result.city?.toLowerCase() === formattedWord)
       .map((result) => {
         return {
           city: result.city,
-          state: result.state ?? result.county ?? "none",
+          state: result.state ?? result.county ?? "-",
           country: result.country,
           countryCode: result.country_code.toUpperCase(),
           lat: result.lat,
