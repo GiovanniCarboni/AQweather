@@ -9,6 +9,7 @@ import snow from "../../img/icons/weather-icons/snow.svg";
 import thunderstorm from "../../img/icons/weather-icons/thunderstorm.svg";
 import load from "../../img/icons/refresh-outline.svg";
 import sun from "../../img/icons/sunny-outline.svg";
+import closeCircle from "../../img/icons/close-circle-outline.svg";
 
 export default class View {
   icons = {
@@ -23,6 +24,7 @@ export default class View {
     thunderstorm,
     load,
     sun,
+    closeCircle,
   };
 
   render(data) {

@@ -35,6 +35,7 @@ const controlWeather = async function (id) {
     model.addToSaved(lat, lon, city, countryCode);
 
     WeatherView.render(model.state.weather);
+    SavedView.render(model.state.saved);
   } catch (err) {
     console.error(err);
   }
