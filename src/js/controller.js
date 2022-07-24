@@ -26,9 +26,13 @@ const controlWeather = async function (id) {
   try {
     WeatherView.renderSpinner();
 
-    const result = model.state.results.find((result) => result.id === id);
+    const { lat, lon, city, countryCode } = model.state.results.find(
+      (result) => result.id === id
+    );
 
-    await model.getWeather(result.lat, result.lon, result.city, result.country);
+    await model.getWeather(lat, lon, city, countryCode);
+
+    model.addToSaved(lat, lon, city, countryCode);
 
     WeatherView.render(model.state.weather);
   } catch (err) {

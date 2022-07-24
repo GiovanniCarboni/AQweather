@@ -2,22 +2,25 @@ import { API_KEY_city, API_KEY_weather } from "./config.js";
 import { formatDate, getJSON } from "./helpers.js";
 
 export const state = {
+  saved: [],
   weather: {
+    city: "",
+    country: "",
     current: {},
     hourly: [],
     daily: [],
-    results: [
-      {
-        city: "",
-        state: "",
-        country: "",
-        countryCode: "",
-        lat: "",
-        lon: "",
-        id: "",
-      },
-    ],
   },
+  results: [
+    {
+      city: "",
+      state: "",
+      country: "",
+      countryCode: "",
+      lat: "",
+      lon: "",
+      id: "",
+    },
+  ],
 };
 
 const days = [
@@ -29,6 +32,15 @@ const days = [
   "Friday",
   "Saturday",
 ];
+
+export const addToSaved = function (lat, lon, city, countryCode) {
+  state.saved.push({
+    city,
+    countryCode,
+    lat,
+    lon,
+  });
+};
 
 export const getCity = async function (searchWord) {
   try {
