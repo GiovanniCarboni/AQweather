@@ -22,6 +22,7 @@ class ResultsBoxView extends View {
     this._form.addEventListener("submit", function (e) {
       e.preventDefault();
       handler(searchBar.value);
+      searchBar.value = "";
       parentEl.classList.remove("hidden");
     });
   }

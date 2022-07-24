@@ -33,12 +33,14 @@ const days = [
   "Saturday",
 ];
 
-export const addToSaved = function (lat, lon, city, countryCode) {
+export const addToSaved = function (lat, lon, city, countryCode, id) {
+  if (state.saved.some((item) => item.id === id)) return;
   state.saved.push({
     city,
     countryCode,
     lat,
     lon,
+    id,
   });
 };
 

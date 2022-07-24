@@ -22,17 +22,17 @@ const controlCity = async function (searchWord) {
   }
 };
 
-const controlWeather = async function (id) {
+const controlWeather = async function (elId) {
   try {
     WeatherView.renderSpinner();
 
-    const { lat, lon, city, countryCode } = model.state.results.find(
-      (result) => result.id === id
+    const { lat, lon, city, countryCode, id } = model.state.results.find(
+      (result) => result.id === elId
     );
 
     await model.getWeather(lat, lon, city, countryCode);
 
-    model.addToSaved(lat, lon, city, countryCode);
+    model.addToSaved(lat, lon, city, countryCode, id);
 
     WeatherView.render(model.state.weather);
     SavedView.render(model.state.saved);
@@ -41,9 +41,27 @@ const controlWeather = async function (id) {
   }
 };
 
+const controlSaved = async function (elId) {
+  try {
+    WeatherView.renderSpinner();
+    console.log(model.state.saved);
+
+    const { lat, lon, city, countryCode, id } = model.state.saved.find(
+      (item) => item.id === elId
+    );
+
+    await model.getWeather(lat, lon, city, countryCode);
+
+    WeatherView.render(model.state.weather);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 const init = function () {
   ResultsBoxView.addHandlerForm(controlCity);
   ResultsBoxView.addHandlerResults(controlWeather);
+  SavedView.addHandlerSaved(controlSaved);
 };
 init();
 
