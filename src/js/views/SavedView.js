@@ -14,17 +14,23 @@ class SavedView extends View {
   }
 
   addHandlerCloseSaved() {
-    const sectionSaved = this._sectionSaved;
+    const that = this;
     this._closeBtn.addEventListener("click", function () {
-      sectionSaved.style.left = "-50rem";
+      that._closeSaved(that);
     });
   }
 
+  _closeSaved(that) {
+    that._sectionSaved.style.left = "-50rem";
+  }
+
   addHandlerSaved(handler) {
+    const that = this;
     this._parentEl.addEventListener("click", function (e) {
       const item = e.target.closest(".saved-item");
       if (!item) return;
       handler(item.id);
+      that._closeSaved(that);
     });
   }
 
