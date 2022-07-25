@@ -1,7 +1,24 @@
 import View from "./View";
 
 class SavedView extends View {
-  _parentEl = document.querySelector(".section-saved");
+  _parentEl = document.querySelector(".saved-list");
+  _menuBtn = document.querySelector(".menu-btn");
+  _sectionSaved = document.querySelector(".section-saved");
+  _closeBtn = document.querySelector(".close-menu-btn");
+
+  addHandlerOpenSaved() {
+    const sectionSaved = this._sectionSaved;
+    this._menuBtn.addEventListener("click", function () {
+      sectionSaved.style.left = "0";
+    });
+  }
+
+  addHandlerCloseSaved() {
+    const sectionSaved = this._sectionSaved;
+    this._closeBtn.addEventListener("click", function () {
+      sectionSaved.style.left = "-50rem";
+    });
+  }
 
   addHandlerSaved(handler) {
     this._parentEl.addEventListener("click", function (e) {
@@ -12,7 +29,6 @@ class SavedView extends View {
   }
 
   _generateMarkup(savedArr) {
-    console.log(savedArr);
     return savedArr
       .map((item) => {
         return `

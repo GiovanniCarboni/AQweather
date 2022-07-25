@@ -62,19 +62,7 @@ const init = function () {
   ResultsBoxView.addHandlerForm(controlCity);
   ResultsBoxView.addHandlerResults(controlWeather);
   SavedView.addHandlerSaved(controlSaved);
+  SavedView.addHandlerOpenSaved();
+  SavedView.addHandlerCloseSaved();
 };
 init();
-
-const menuBtn = document.querySelector(".menu-btn");
-
-const savedList = document.querySelector(".section-saved");
-
-const closeMenuBtn = document.querySelector(".close-menu-btn");
-
-menuBtn.addEventListener("click", function () {
-  savedList.style.left = "0";
-});
-
-closeMenuBtn.addEventListener("click", function () {
-  savedList.style.left = "-50rem";
-});
