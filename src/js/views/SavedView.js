@@ -24,12 +24,18 @@ class SavedView extends View {
     that._sectionSaved.style.left = "-50rem";
   }
 
-  addHandlerSaved(handler) {
+  addHandlerSaved(reload, deletes) {
     const that = this;
     this._parentEl.addEventListener("click", function (e) {
       const item = e.target.closest(".saved-item");
+      const deleteBtn = e.target.closest(".saved-item--delete");
       if (!item) return;
-      handler(item.id);
+
+      if (deleteBtn) {
+        deletes(item.id);
+        return;
+      }
+      reload(item.id);
       that._closeSaved(that);
     });
   }

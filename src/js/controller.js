@@ -58,6 +58,11 @@ const controlSaved = async function (elId) {
   }
 };
 
+const controlDeleteSaved = function (elId) {
+  model.removeFromSaved(elId);
+  SavedView.render(model.state.saved);
+};
+
 const controlRefresh = async function () {
   try {
     if (!model.state.weather) return;
@@ -75,7 +80,7 @@ const init = function () {
   ResultsBoxView.addHandlerForm(controlCity);
   ResultsBoxView.addHandlerResults(controlWeather);
   WeatherView.addHandlerRefresh(controlRefresh);
-  SavedView.addHandlerSaved(controlSaved);
+  SavedView.addHandlerSaved(controlSaved, controlDeleteSaved);
   SavedView.addHandlerOpenSaved();
   SavedView.addHandlerCloseSaved();
 };

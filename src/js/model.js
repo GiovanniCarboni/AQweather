@@ -15,6 +15,11 @@ const days = [
   "Saturday",
 ];
 
+export const removeFromSaved = function (id) {
+  const index = state.saved.findIndex((item) => item.id === id);
+  state.saved.splice(index, index + 1);
+};
+
 export const addToSaved = function (lat, lon, city, countryCode, id) {
   if (state.saved.some((item) => item.id === id)) return;
   state.saved.push({
@@ -34,19 +39,17 @@ export const getCity = async function (searchWord) {
       `https://api.geoapify.com/v1/geocode/search?city=${formattedWord}&format=json&type=city&limit=100&apiKey=${API_KEY_city}`
     );
 
-    const results = cityData.results
-      // .filter((result) => result.city?.toLowerCase() === formattedWord)
-      .map((result) => {
-        return {
-          city: result.city,
-          state: result.state ?? result.county ?? "-",
-          country: result.country,
-          countryCode: result.country_code.toUpperCase(),
-          lat: result.lat,
-          lon: result.lon,
-          id: `${result.city}%${result.lat}:${result.lon}`,
-        };
-      });
+    const results = cityData.results.map((result) => {
+      return {
+        city: result.city,
+        state: result.state ?? result.county ?? "-",
+        country: result.country,
+        countryCode: result.country_code.toUpperCase(),
+        lat: result.lat,
+        lon: result.lon,
+        id: `${result.city}%${result.lat}:${result.lon}`,
+      };
+    });
 
     if (results.length < 1) throw new Error("city data not available");
 
