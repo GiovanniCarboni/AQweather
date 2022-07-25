@@ -3,24 +3,6 @@ import { formatDate, getJSON } from "./helpers.js";
 
 export const state = {
   saved: [],
-  weather: {
-    city: "",
-    country: "",
-    current: {},
-    hourly: [],
-    daily: [],
-  },
-  results: [
-    {
-      city: "",
-      state: "",
-      country: "",
-      countryCode: "",
-      lat: "",
-      lon: "",
-      id: "",
-    },
-  ],
 };
 
 const days = [
@@ -83,6 +65,9 @@ export const getWeather = async function (lat, lon, city, country) {
     state.weather = {
       city: city,
       country: country,
+      lat,
+      lon,
+      id: `${city}%${lat}:${lon}`,
       current: {
         temp: Math.round(weatherData.current.temp),
         description: weatherData.current.weather[0].description,

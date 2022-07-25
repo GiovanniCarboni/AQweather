@@ -58,9 +58,23 @@ const controlSaved = async function (elId) {
   }
 };
 
+const controlRefresh = async function () {
+  try {
+    if (!model.state.weather) return;
+    WeatherView.renderSpinner();
+    const { lat, lon, city, country } = model.state.weather;
+    await model.getWeather(lat, lon, city, country);
+
+    WeatherView.render(model.state.weather);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const init = function () {
   ResultsBoxView.addHandlerForm(controlCity);
   ResultsBoxView.addHandlerResults(controlWeather);
+  WeatherView.addHandlerRefresh(controlRefresh);
   SavedView.addHandlerSaved(controlSaved);
   SavedView.addHandlerOpenSaved();
   SavedView.addHandlerCloseSaved();

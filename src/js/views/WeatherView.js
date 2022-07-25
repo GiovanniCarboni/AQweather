@@ -2,6 +2,11 @@ import View from "./View.js";
 
 class WeatherView extends View {
   _parentEl = document.querySelector(".weather-display");
+  _refreshBtn = document.querySelector(".refresh-btn");
+
+  addHandlerRefresh(handler) {
+    this._refreshBtn.addEventListener("click", handler);
+  }
 
   _generateMarkup(weather) {
     return `
