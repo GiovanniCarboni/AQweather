@@ -30,16 +30,11 @@ body {
 // SECTION SAVED
 
 .saved-item {
-  &--temp {
+  &--country {
     font-size: config.$f-size-ml;
     font-weight: config.$f-weight-l;
     color: config.$white;
     letter-spacing: config.$let-sp-m;
-  }
-  .hot {
-    @include config.font-border($temp: "hot");
-  }
-  .cold {
     @include config.font-border($temp: "cold");
   }
   &--city {

@@ -45,8 +45,8 @@ class SavedView extends View {
       .map((item) => {
         return `
       <li class="saved-item" id="${item.id}">
-        <div class="saved-item--temp hot">39°</div>
-        <div class="saved-item--city">${item.city} (${item.countryCode})</div>
+        <div class="saved-item--country">${item.countryCode}</div>
+        <div class="saved-item--city">${item.city}</div>
         <button class="saved-item--delete btn saved-icon">
           <img
             src="${this.icons.closeCircle}"
