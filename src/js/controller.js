@@ -87,3 +87,11 @@ const init = function () {
   SavedView.addHandlerCloseSaved();
 };
 init();
+
+const checkSaved = function () {
+  const storage = localStorage.getItem("saved");
+  if (!storage) return;
+  model.state.saved = JSON.parse(storage);
+  SavedView.render(model.state.saved);
+};
+checkSaved();

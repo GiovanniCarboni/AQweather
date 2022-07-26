@@ -29,6 +29,7 @@ export const addToSaved = function (lat, lon, city, countryCode, id) {
     lon,
     id,
   });
+  localStorage.setItem("saved", JSON.stringify(state.saved));
 };
 
 export const getCity = async function (searchWord) {
