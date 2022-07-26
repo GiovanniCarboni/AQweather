@@ -62,7 +62,7 @@ export const getCity = async function (searchWord) {
 export const getWeather = async function (lat, lon, city, country) {
   try {
     const weatherData = await getJSON(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY_weather}l`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY_weather}`
     );
 
     state.weather = {
