@@ -15,9 +15,14 @@ const days = [
   "Saturday",
 ];
 
+const updateStorage = function () {
+  localStorage.setItem("saved", JSON.stringify(state.saved));
+};
+
 export const removeFromSaved = function (id) {
   const index = state.saved.findIndex((item) => item.id === id);
   state.saved.splice(index, index + 1);
+  updateStorage();
 };
 
 export const addToSaved = function (lat, lon, city, countryCode, id) {
@@ -29,7 +34,7 @@ export const addToSaved = function (lat, lon, city, countryCode, id) {
     lon,
     id,
   });
-  localStorage.setItem("saved", JSON.stringify(state.saved));
+  updateStorage();
 };
 
 export const getCity = async function (searchWord) {
