@@ -10,6 +10,7 @@ import thunderstorm from "../../img/icons/weather-icons/thunderstorm.svg";
 import load from "../../img/icons/refresh-outline.svg";
 import sun from "../../img/icons/sunny-outline.svg";
 import closeCircle from "../../img/icons/close-circle-outline.svg";
+import error from "../../img/icons/error.svg";
 
 export default class View {
   icons = {
@@ -25,12 +26,14 @@ export default class View {
     load,
     sun,
     closeCircle,
+    error,
   };
 
   render(data) {
     this._clear();
     this._parentEl.insertAdjacentHTML("afterbegin", this._generateMarkup(data));
   }
+
   renderSpinner() {
     this._clear();
     const spinner = `
@@ -43,6 +46,18 @@ export default class View {
     </div>`;
     this._parentEl.insertAdjacentHTML("afterbegin", spinner);
   }
+
+  renderError(err) {
+    this._clear();
+    this._parentEl.insertAdjacentHTML(
+      "afterbegin",
+      `<p class="error-message">
+        <img src="${this.icons.error}" alt="error icon" width="30">
+        <span>${this._errorMessage} (${err})</span>
+      </p>`
+    );
+  }
+
   _clear() {
     this._parentEl.textContent = "";
   }

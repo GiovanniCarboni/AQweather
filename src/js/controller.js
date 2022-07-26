@@ -17,8 +17,8 @@ const controlCity = async function (searchWord) {
 
     ResultsBoxView.render(model.state.results);
   } catch (err) {
-    ResultsBoxView.renderError();
-    console.error("💣💣💣", err);
+    ResultsBoxView.renderError(err);
+    console.error("💥💥", err);
   }
 };
 
@@ -37,7 +37,8 @@ const controlWeather = async function (elId) {
     WeatherView.render(model.state.weather);
     SavedView.render(model.state.saved);
   } catch (err) {
-    console.error(err);
+    WeatherView.renderError(err);
+    console.error("💥💥", err);
   }
 };
 
@@ -72,7 +73,8 @@ const controlRefresh = async function () {
 
     WeatherView.render(model.state.weather);
   } catch (err) {
-    console.log(err);
+    WeatherView.renderError(err);
+    console.error("💥💥", err);
   }
 };
 

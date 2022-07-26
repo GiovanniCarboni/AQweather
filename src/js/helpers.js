@@ -12,8 +12,8 @@ export const formatDate = function (date) {
 export const getJSON = async function (url) {
   try {
     const res = await fetch(url);
-    if (!res.ok) throw new Error("data does not exist");
     const data = await res.json();
+    if (!res.ok) throw new Error("could not fetch data");
     return data;
   } catch (err) {
     throw err;

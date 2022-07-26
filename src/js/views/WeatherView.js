@@ -3,6 +3,7 @@ import View from "./View.js";
 class WeatherView extends View {
   _parentEl = document.querySelector(".weather-display");
   _refreshBtn = document.querySelector(".refresh-btn");
+  _errorMessage = "Could not find weather data";
 
   addHandlerRefresh(handler) {
     this._refreshBtn.addEventListener("click", handler);

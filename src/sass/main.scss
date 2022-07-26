@@ -9,8 +9,9 @@
 @use "./components/search-bar";
 @use "./components/results-box";
 @use "./components/spinner";
+@use "./components/error";
 
-// /* LAYOUT */
+/* LAYOUT */
 @use "./layout.scss";
 
 /* SECTIONS (borders included) */

@@ -1,0 +1,6 @@
+@use "../config";
+
+.error-message {
+  @include config.flex($gap: config.$gap-s);
+  margin: 0 auto;
+}

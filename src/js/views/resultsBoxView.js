@@ -6,14 +6,6 @@ class ResultsBoxView extends View {
   _searchBar = document.querySelector(".search-bar");
   _errorMessage = "Could not find city";
 
-  renderError() {
-    this._clear();
-    this._parentEl.insertAdjacentHTML(
-      "afterbegin",
-      `<p class="error-message">${this._errorMessage}</p>`
-    );
-  }
-
   addHandlerForm(handler) {
     const that = this;
     this._form.addEventListener("submit", function (e) {
