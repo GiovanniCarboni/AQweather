@@ -40,12 +40,11 @@ export const addToSaved = function (lat, lon, city, countryCode, id) {
 export const getCity = async function (searchWord) {
   try {
     const formattedWord = searchWord.toLowerCase().trim();
-
-    const cityData = await getJSON(
+    const { results } = await getJSON(
       `https://api.geoapify.com/v1/geocode/search?city=${formattedWord}&format=json&type=city&limit=100&apiKey=${API_KEY_city}`
     );
 
-    const results = cityData.results.map((result) => {
+    const res = results.map((result) => {
       return {
         city: result.city,
         state: result.state ?? result.county ?? "-",
@@ -59,7 +58,7 @@ export const getCity = async function (searchWord) {
 
     if (results.length < 1) throw new Error("city data not available");
 
-    state.results = results;
+    state.results = res;
   } catch (err) {
     throw err;
   }
