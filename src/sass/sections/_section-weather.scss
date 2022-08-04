@@ -127,13 +127,13 @@
         }
       }
       &--day {
-        width: 40%;
+        width: 50%;
       }
 
       &--desc {
+        width: 50%;
         @include config.grid($columns: 1fr 1fr 1fr, $centerY: true);
         div {
-          width: 50%;
           padding: config.$pad-s config.$pad-m;
         }
         .min-temp,
