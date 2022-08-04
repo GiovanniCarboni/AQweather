@@ -1,7 +1,7 @@
 import "core-js/stable";
 import { async } from "regenerator-runtime";
 import * as model from "./model.js";
-import ResultsBoxView from "./views/ResultsBoxView.js";
+import ResultsBoxView from "./views/resultsBoxView.js";
 import SavedView from "./views/SavedView.js";
 import WeatherView from "./views/WeatherView.js";
 
