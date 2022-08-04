@@ -81,7 +81,7 @@ class WeatherView extends View {
           <span class="details-tag">Pressure</span>
           <span class="details-entry pressure">${
             weather.current.pressure
-          }</span>
+          }hPa</span>
         </div>
       </div>
     </div>
